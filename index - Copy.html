@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TeamScore</title>
+    <style>
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      @keyframes slideIn {
+        from {
+          transform: translateY(-20px);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+
+      @keyframes pulse {
+        0% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.05);
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 20px;
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        color: #333;
+        transition: background-color 0.3s ease;
+      }
+
+      .dashboard {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .main-board,
+      .side-board {
+        background-color: rgba(255, 255, 255, 0.9);
+        border-radius: 15px;
+        padding: 20px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        animation: fadeIn 0.5s ease-out;
+      }
+
+      .main-board:hover,
+      .side-board:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+      }
+
+      .team {
+        display: flex;
+        align-items: center;
+        margin-bottom: 15px;
+        padding: 10px;
+        border-radius: 10px;
+        transition: background-color 0.3s ease;
+        animation: slideIn 0.5s ease-out;
+      }
+
+      .team:hover {
+        background-color: rgba(0, 123, 255, 0.1);
+      }
+
+      .team-logo {
+        width: 60px;
+        height: 60px;
+        object-fit: cover;
+        border-radius: 50%;
+        margin-left: 15px;
+        transition: transform 0.3s ease;
+      }
+
+      .team-logo:hover {
+        transform: scale(1.1);
+      }
+
+      .team-name {
+        font-weight: bold;
+        flex-grow: 1;
+        font-size: 1.1em;
+      }
+
+      .team-score {
+        font-size: 1.4em;
+        font-weight: bold;
+        margin-right: 15px;
+        color: #007bff;
+        transition: color 0.3s ease;
+      }
+
+      .team:hover .team-score {
+        color: #0056b3;
+      }
+
+      .navigation-buttons {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 20px;
+      }
+
+      button {
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-size: 1em;
+      }
+
+      button:hover {
+        background-color: #0056b3;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      }
+
+      .team-details {
+        display: none;
+        margin-top: 10px;
+        padding: 15px;
+        background-color: rgba(249, 249, 249, 0.9);
+        border-radius: 10px;
+        transition: all 0.3s ease;
+        animation: fadeIn 0.5s ease-out;
+      }
+
+      .team-details.active {
+        display: block;
+      }
+
+      .details-toggle {
+        background-color: #28a745;
+        margin-right: 10px;
+      }
+
+      .details-toggle:hover {
+        background-color: #218838;
+      }
+
+      h2 {
+        color: #007bff;
+        text-align: center;
+        margin-bottom: 20px;
+        animation: pulse 2s infinite;
+      }
+      .red {
+        color: red;
+      }
+      .green {
+        color: #28a745;
+      }
+
+      @media (min-width: 768px) {
+        .dashboard {
+          flex-direction: row;
+        }
+        .main-board {
+          flex: 2;
+        }
+        .side-board {
+          flex: 1;
+        }
+      }
+
+      @media (max-width: 767px) {
+        .team {
+          flex-wrap: wrap;
+        }
+        .team-logo {
+          margin-bottom: 10px;
+        }
+        .team-name,
+        .team-score {
+          width: 100%;
+          text-align: center;
+          margin-bottom: 10px;
+        }
+        .details-toggle {
+          width: 100%;
+          margin-right: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="dashboard">
+      <div class="main-board">
+        <h2>لوحة النتائج الرئيسية</h2>
+        <div class="team">
+          <img src="./imgs/IMG_2109.JPG" alt="" class="team-logo" />
+          <span class="team-name"> سواعد الخير </span>
+          <span class="team-score">5</span>
+          <button class="details-toggle" onclick="toggleDetails('team4')">
+            التفاصيل
+          </button>
+        </div>
+        <div id="team4" class="team-details">
+          <p>الأول في اختيار الاسم</p>
+        </div>
+        <div class="team">
+          <img
+            src="./WhatsApp Image 2024-10-15 at 21.44.34.jpeg"
+            alt=""
+            class="team-logo"
+          />
+
+          <span class="team-name"> دكان السعادة </span>
+          <span class="team-score">0</span>
+          <button class="details-toggle" onclick="toggleDetails('team1')">
+            التفاصيل
+          </button>
+        </div>
+        <div id="team1" class="team-details">
+          <p>في الآخر هتعرف 🫣😂😂😂</p>
+        </div>
+
+        <div class="team">
+          <img
+            src="./imgs/Picsart_24-09-24_13-15-39-619.jpg"
+            alt=""
+            class="team-logo"
+          />
+          <span class="team-name"> بصمة خير </span>
+          <span class="team-score">0</span>
+          <button class="details-toggle" onclick="toggleDetails('team2')">
+            التفاصيل
+          </button>
+        </div>
+        <div id="team2" class="team-details">
+          <p>في الآخر هتعرف 🫣😂😂😂</p>
+        </div>
+
+        <div class="team">
+          <img
+            src="./imgs/WhatsApp Image 2024-09-21 at 18.42.47.jpeg"
+            alt=""
+            class="team-logo"
+          />
+          <span class="team-name"> آمالنا بسمة </span>
+          <span class="team-score">0</span>
+          <button class="details-toggle" onclick="toggleDetails('team3')">
+            التفاصيل
+          </button>
+        </div>
+        <div id="team3" class="team-details">
+          <p>في الآخر هتعرف 🫣😂😂😂</p>
+        </div>
+
+        <div class="team">
+          <img src="./imgs/IMG_2107.JPG" alt="" class="team-logo" />
+          <span class="team-name"> غيث </span>
+          <span class="team-score">0</span>
+          <button class="details-toggle" onclick="toggleDetails('team5')">
+            التفاصيل
+          </button>
+        </div>
+        <div id="team5" class="team-details">
+          <p>في الآخر هتعرف 🫣😂😂😂</p>
+        </div>
+
+        <!-- <div class="navigation-buttons">
+          <button>الفريق السابق</button>
+          <button>الفريق التالي</button>
+        </div> -->
+      </div>
+      <div class="side-board">
+        <h2 class="green">لا تخافوا ولكن احذرواا 🫵😉</h2>
+        <div>
+          <div class="team">
+            <img src="./imgs/IMG_2109.JPG" alt="" class="team-logo" />
+            <span class="team-name"> سواعد الخير </span>
+          </div>
+          <div class="team">
+            <img
+              src="./WhatsApp Image 2024-10-15 at 21.44.34.jpeg"
+              alt=""
+              class="team-logo"
+            />
+            <span class="team-name"> دكان السعادة </span>
+          </div>
+          <div class="team">
+            <img
+              src="./imgs/WhatsApp Image 2024-09-21 at 18.42.47.jpeg"
+              alt=""
+              class="team-logo"
+            />
+            <span class="team-name"> آمالنا بسمة </span>
+          </div>
+        </div>
+        <div>
+          <h2 class="red">انتوا بقى خافوا واحذروا 😂😶‍🌫️🔥</h2>
+
+          <div class="team">
+            <img
+              src="./imgs/Picsart_24-09-24_13-15-39-619.jpg"
+              alt=""
+              class="team-logo"
+            />
+            <span class="team-name"> بصمة خير </span>
+          </div>
+          <div class="team">
+            <img src="./imgs/IMG_2107.JPG" alt="" class="team-logo" />
+            <span class="team-name"> غيث </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      function toggleDetails(teamId) {
+        var details = document.getElementById(teamId);
+        details.classList.toggle("active");
+      }
+
+      // Add smooth scrolling for mobile devices
+      document.querySelectorAll("button").forEach((button) => {
+        button.addEventListener("click", () => {
+          setTimeout(() => {
+            window.scrollTo({
+              top: button.offsetTop - 20,
+              behavior: "smooth",
+            });
+          }, 100);
+        });
+      });
+    </script>
+  </body>
+</html>
+d
